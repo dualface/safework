@@ -221,7 +221,10 @@ func runCommand(cli CommandLine) error {
 	wr.Write(out)
 	wr.Write(errout)
 	wr.Close()
-	fmt.Println(b.String())
+	s := strings.TrimSpace(b.String())
+	if len(s) > 0 {
+		fmt.Println(s)
+	}
 	return nil
 }
 
