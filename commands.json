@@ -1,0 +1,24 @@
+{
+  "startup": [
+    {
+      "command": "chcp",
+      "args": [
+        "65001"
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "command": "taskkill",
+      "args": [
+        "/F",
+        "/IM",
+        "Firefox.exe"
+      ],
+      "background": true,
+      "ignore_error": true
+    }
+  ],
+  "show_apps": [],
+  "hide_apps": []
+}
