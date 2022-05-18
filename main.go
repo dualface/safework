@@ -55,6 +55,7 @@ func main() {
 	err := loadConfig()
 	if err != nil {
 		fmt.Println(err)
+		fmt.Scanln()
 		os.Exit(1)
 	}
 
@@ -62,6 +63,7 @@ func main() {
 
 	err = regHotKeys()
 	if err != nil {
+		fmt.Scanln()
 		os.Exit(1)
 	}
 
@@ -70,6 +72,7 @@ func main() {
 	err = runCommands(globalCfg.Startup, false)
 	if err != nil {
 		cleanup()
+		fmt.Scanln()
 		os.Exit(1)
 	} else {
 		mainthread.Init(listenHotKeys)
@@ -153,6 +156,8 @@ func regHotKey(name string, key hotkey.Key, mods ...hotkey.Modifier) error {
 }
 
 func listenHotKeys() {
+	fmt.Println()
+	fmt.Println("[LISTENING HOT KEYS]")
 	cases := make([]reflect.SelectCase, len(listenKeys))
 	for i, reg := range listenKeys {
 		cases[i] = reflect.SelectCase{
@@ -221,9 +226,9 @@ func runCommand(cli CommandLine) error {
 	wr.Write(out)
 	wr.Write(errout)
 	wr.Close()
-	s := strings.TrimSpace(b.String())
-	if len(s) > 0 {
-		fmt.Println(s)
+	bs := strings.TrimSpace(b.String())
+	if len(bs) > 0 {
+		fmt.Println(bs)
 	}
 	return nil
 }
@@ -273,7 +278,6 @@ func runMacroWaitPort(cli CommandLine) error {
 		for _, port := range cli.Args {
 			conn, err := net.DialTimeout("tcp", port, time.Second/2)
 			if err != nil {
-				println(err.Error())
 				ok = false
 				break
 			}
@@ -290,7 +294,7 @@ func runMacroWaitPort(cli CommandLine) error {
 			break
 		}
 
-		time.Sleep(time.Second / 2)
+		time.Sleep(time.Second / 10)
 	}
 
 	return errors.New("timeout")
