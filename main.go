@@ -74,9 +74,9 @@ func main() {
 		cleanup()
 		fmt.Scanln()
 		os.Exit(1)
-	} else {
-		mainthread.Init(listenHotKeys)
 	}
+
+	mainthread.Init(listenHotKeys)
 }
 
 func cleanup() {
