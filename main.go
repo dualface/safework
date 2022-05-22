@@ -132,7 +132,7 @@ func loadConfig() error {
 }
 
 func regHotKeys() error {
-	err := regHotKey("CTL + SHIFT + ALT + K", hotkey.KeyK, hotkey.ModCtrl, hotkey.ModShift, hotkey.ModAlt)
+	err := regHotKey("CTL + SHIFT + ALT + X", hotkey.KeyX, hotkey.ModCtrl, hotkey.ModShift, hotkey.ModAlt)
 	if err != nil {
 		return err
 	}
